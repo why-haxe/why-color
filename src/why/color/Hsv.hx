@@ -1,4 +1,4 @@
-package color;
+package why.color;
 
 @:forward
 abstract Hsv(Base) from Base to Base {

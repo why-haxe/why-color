@@ -1,4 +1,4 @@
-package color;
+package why.color;
 
 @:pure
 class Base {

@@ -1,4 +1,4 @@
-package color;
+package why.color;
 
 @:forward
 abstract Rgb(Base) from Base to Base {
