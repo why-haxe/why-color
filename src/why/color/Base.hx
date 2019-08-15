@@ -1,14 +1,17 @@
 package why.color;
 
+import haxe.ds.Vector;
+
 @:pure
-class Base {
-	public final v1:Float;
-	public final v2:Float;
-	public final v3:Float;
+abstract Base(Vector<Float>) {
+	public var v1(get, never):Float; inline function get_v1() return this[0];
+	public var v2(get, never):Float; inline function get_v2() return this[1];
+	public var v3(get, never):Float; inline function get_v3() return this[2];
 	
-	public inline function new(v1, v2, v3) {
-		this.v1 = v1;
-		this.v2 = v2;
-		this.v3 = v3;
+	public function new(v1, v2, v3) {
+		this = new Vector(3);
+		this[0] = v1;
+		this[1] = v2;
+		this[2] = v3;
 	}
 }

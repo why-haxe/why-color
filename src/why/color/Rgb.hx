@@ -40,7 +40,7 @@ abstract Rgb(Base) from Base to Base {
 	@:op(A!=B) public inline function neq(other:Rgb) return !eq(other);
 	
 	public inline function toHex():String return '#' + hex(r) + hex(g) + hex(b);
-	inline static function hex(v:Float) return StringTools.hex(Math.round(v * 255), 2);
+	static function hex(v:Float) return StringTools.hex(Math.round(v * 255), 2);
 	
 	#if react_native
 	@:to public inline function toReactNativeColor():react.native.component.props.Color return toHex();

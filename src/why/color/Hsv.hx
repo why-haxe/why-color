@@ -4,6 +4,9 @@ package why.color;
 abstract Hsv(Base) from Base to Base {
 	public static var BLACK = new Hsv(0, 1, 0);
 	public static var WHITE = new Hsv(0, 0, 1);
+	public static var RED = new Hsv(0, 1, 1);
+	public static var GREEN = new Hsv(1/3, 1, 1);
+	public static var BLUE = new Hsv(2/3, 1, 1);
 	
 	
 	public var luminance(get, never):Float;
