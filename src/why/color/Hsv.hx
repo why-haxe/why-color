@@ -8,7 +8,6 @@ abstract Hsv(Base) from Base to Base {
 	public static var GREEN = new Hsv(1/3, 1, 1);
 	public static var BLUE = new Hsv(2/3, 1, 1);
 	
-	
 	public var luminance(get, never):Float;
 	public var h(get, never):Float;
 	public var s(get, never):Float;
@@ -21,7 +20,23 @@ abstract Hsv(Base) from Base to Base {
 	
 	public inline function new(h, s, v) this = new Base(h, s, v);
 	
-	public static function fromRgb(r:Float, g:Float, b:Float):Hsv {
+	public static function hsv2rgb(h:Float, s:Float, v:Float):Rgb {
+		var i = Std.int(h * 6);
+		var f = h * 6 - i;
+		var p = v * (1 - s);
+		var q = v * (1 - f * s);
+		var t = v * (1 - (1 - f) * s);
+		
+		return 
+			if(i == 0) new Rgb(v, t, p);
+			else if(i == 1) new Rgb(q, v, p);
+			else if(i == 2) new Rgb(p, v, t);
+			else if(i == 3) new Rgb(p, q, v);
+			else if(i == 4) new Rgb(t, p, v);
+			else new Rgb(v, p, q);
+	}
+	
+	public static function rgb2hsv(r:Float, g:Float, b:Float):Hsv {
 		var cmax = Math.max(r, Math.max(g, b));
 		var cmin = Math.min(r, Math.min(g, b));
 		var dc = cmax - cmin;
@@ -37,13 +52,13 @@ abstract Hsv(Base) from Base to Base {
 		return new Hsv(h, cmax == 0 ? 0 : dc / cmax, cmax);
 	}
 	
-	@:op(A==B) public inline function eq(other:Hsv) return h == other.h && s == other.s && v == other.v;
+	@:op(A==B) public inline function eq(other:Hsv) return this.eq(other);
 	@:op(A!=B) public inline function neq(other:Hsv) return !eq(other);
 	
-	public inline function toRgb() return Rgb.fromHsv(h, s, v);
-	public inline function toHex() return toRgb().toHex();
+	public inline function fromRgb(v:Rgb) return rgb2hsv(v.r, v.g, v.b);
+	public inline function toRgb() return hsv2rgb(h, s, v);
 	
 	#if react_native
-	@:to public inline function toReactNativeColor():react.native.component.props.Color return toHex();
+	@:to public inline function toReactNativeColor():react.native.component.props.Color return toRgb().toReactNativeColor();
 	#end
 }

@@ -14,4 +14,6 @@ abstract Base(Vector<Float>) {
 		this[1] = v2;
 		this[2] = v3;
 	}
+	
+	public function eq(other:Base) return v1 == other.v1 && v2 == other.v2 && v3 == other.v3;
 }

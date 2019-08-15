@@ -20,29 +20,14 @@ abstract Rgb(Base) from Base to Base {
 	
 	public inline function new(r, g, b) this = new Base(r, g, b);
 	
-	public static function fromHsv(h:Float, s:Float, v:Float):Rgb {
-		var i = Std.int(h * 6);
-		var f = h * 6 - i;
-		var p = v * (1 - s);
-		var q = v * (1 - f * s);
-		var t = v * (1 - (1 - f) * s);
-		
-		return 
-			if(i == 0) new Rgb(v, t, p);
-			else if(i == 1) new Rgb(q, v, p);
-			else if(i == 2) new Rgb(p, v, t);
-			else if(i == 3) new Rgb(p, q, v);
-			else if(i == 4) new Rgb(t, p, v);
-			else new Rgb(v, p, q);
-	}
-	
-	@:op(A==B) public inline function eq(other:Rgb) return r == other.r && g == other.g && b == other.b;
+	@:op(A==B) public inline function eq(other:Rgb) return this.eq(other);
 	@:op(A!=B) public inline function neq(other:Rgb) return !eq(other);
 	
-	public inline function toHex():String return '#' + hex(r) + hex(g) + hex(b);
-	static function hex(v:Float) return StringTools.hex(Math.round(v * 255), 2);
+	public inline function asInt():Int return (int(r) << 16) | (int(g) << 8) | int(b);
+	public inline function toHex():String return StringTools.hex(asInt(), 6);
+	static inline function int(v:Float):Int return Math.round(v * 255);
 	
 	#if react_native
-	@:to public inline function toReactNativeColor():react.native.component.props.Color return toHex();
+	@:to public inline function toReactNativeColor():react.native.component.props.Color return '#' + toHex();
 	#end
 }
