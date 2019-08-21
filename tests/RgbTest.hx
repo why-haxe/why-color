@@ -13,7 +13,7 @@ class RgbTest {
 	@:variant(why.color.Rgb.GREEN, 0x00FF00, '00FF00')
 	@:variant(why.color.Rgb.BLUE, 0x0000FF, '0000FF')
 	public function const(color:Rgb, int:Int, hex:String) {
-		asserts.assert(color.asInt() == int);
+		asserts.assert(color.toInt() == int);
 		asserts.assert(color.toHex() == hex);
 		return asserts.done();
 	}

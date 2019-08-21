@@ -8,10 +8,10 @@ abstract Hsv(Base) from Base to Base {
 	public static var GREEN = new Hsv(1/3, 1, 1);
 	public static var BLUE = new Hsv(2/3, 1, 1);
 	
-	public var luminance(get, never):Float;
-	public var h(get, never):Float;
-	public var s(get, never):Float;
-	public var v(get, never):Float;
+	public var luminance(get, never):Value;
+	public var h(get, never):Value;
+	public var s(get, never):Value;
+	public var v(get, never):Value;
 	
 	inline function get_luminance() return toRgb().luminance;
 	inline function get_h() return this.v1;

@@ -13,7 +13,7 @@ class HsvTest {
 	@:variant(why.color.Hsv.GREEN, 0x00FF00, '00FF00')
 	@:variant(why.color.Hsv.BLUE, 0x0000FF, '0000FF')
 	public function const(color:Hsv, int:Int, hex:String) {
-		asserts.assert(color.toRgb().asInt() == int);
+		asserts.assert(color.toRgb().toInt() == int);
 		asserts.assert(color.toRgb().toHex() == hex);
 		return asserts.done();
 	}
