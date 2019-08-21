@@ -27,13 +27,14 @@ abstract Hsv(Base) from Base to Base {
 		var q = v * (1 - f * s);
 		var t = v * (1 - (1 - f) * s);
 		
-		return 
-			if(i == 0) new Rgb(v, t, p);
-			else if(i == 1) new Rgb(q, v, p);
-			else if(i == 2) new Rgb(p, v, t);
-			else if(i == 3) new Rgb(p, q, v);
-			else if(i == 4) new Rgb(t, p, v);
-			else new Rgb(v, p, q);
+		return switch i {
+			case 0: new Rgb(v, t, p);
+			case 1: new Rgb(q, v, p);
+			case 2: new Rgb(p, v, t);
+			case 3: new Rgb(p, q, v);
+			case 4: new Rgb(t, p, v);
+			case _: new Rgb(v, p, q);
+		}
 	}
 	
 	public static function rgb2hsv(r:Float, g:Float, b:Float):Hsv {
@@ -55,8 +56,8 @@ abstract Hsv(Base) from Base to Base {
 	@:op(A==B) public inline function eq(other:Hsv) return this.eq(other);
 	@:op(A!=B) public inline function neq(other:Hsv) return !eq(other);
 	
-	public inline function fromRgb(v:Rgb) return rgb2hsv(v.r, v.g, v.b);
-	public inline function toRgb() return hsv2rgb(h, s, v);
+	@:from public static inline function fromRgb(v:Rgb):Hsv return rgb2hsv(v.r, v.g, v.b);
+	@:to public inline function toRgb():Rgb return hsv2rgb(h, s, v);
 	
 	#if react_native
 	@:to public inline function toReactNativeColor():react.native.component.props.Color return toRgb().toReactNativeColor();
