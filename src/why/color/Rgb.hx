@@ -1,6 +1,6 @@
 package why.color;
 
-@:forward
+@:forward @:observable
 abstract Rgb(Base) from Base to Base {
 	public static var BLACK = new Rgb(0, 0, 0);
 	public static var WHITE = new Rgb(1, 1, 1);

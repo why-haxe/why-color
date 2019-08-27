@@ -2,7 +2,6 @@ package why.color;
 
 import haxe.ds.Vector;
 
-@:pure
 abstract Base(Vector<Value>) {
 	public var v1(get, never):Value; inline function get_v1() return this[0];
 	public var v2(get, never):Value; inline function get_v2() return this[1];

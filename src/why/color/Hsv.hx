@@ -1,6 +1,6 @@
 package why.color;
 
-@:forward
+@:forward @:observable
 abstract Hsv(Base) from Base to Base {
 	public static var BLACK = new Hsv(0, 1, 0);
 	public static var WHITE = new Hsv(0, 0, 1);
