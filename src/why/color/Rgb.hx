@@ -23,6 +23,8 @@ abstract Rgb(Base) from Base to Base {
 	@:op(A==B) public inline function eq(other:Rgb) return this.eq(other);
 	@:op(A!=B) public inline function neq(other:Rgb) return !eq(other);
 	
+	public inline static function fromInt24(v:Int):Rgb return fromInt8((v >> 16) & 0xff, (v >> 8) & 0xff,v & 0xff);
+	public inline static function fromInt8(r:Int, g:Int, b:Int):Rgb return new Rgb((r & 0xff) / 0xff, (g & 0xff) / 0xff, (b & 0xff) / 0xff);
 	public inline function toInt():Int return (r.toInt8() << 16) | (g.toInt8() << 8) | b.toInt8();
 	public inline function toHex():String return StringTools.hex(toInt(), 6);
 	
