@@ -59,6 +59,7 @@ abstract Hsv(Base) from Base to Base {
 	@:from public static inline function fromRgb(v:Rgb):Hsv return rgb2hsv(v.r, v.g, v.b);
 	@:to public inline function toRgb():Rgb return hsv2rgb(h, s, v);
 	
+	public inline function toCssColor():String return toRgb().toCssColor();
 	#if react_native
 	@:to public inline function toReactNativeColor():react.native.component.props.Color return toRgb().toReactNativeColor();
 	#end
